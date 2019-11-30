@@ -1,4 +1,5 @@
 #include "solver_2d.hpp"
+#include <random>
 
 
 namespace nonogram_solver
@@ -48,14 +49,20 @@ namespace nonogram_solver
 
 	void Solver2D::solve(const PanelSet2D &panelSet)
 	{
-		for(unsigned i = 0; i < panelSet.getHeight(); ++i)
+		this->panelSet = panelSet;
+		do
 		{
-			solveRow(i);
+			for(unsigned i = 0; i < this->panelSet.getHeight(); ++i)
+			{
+				solveRow(i);
+			}
+			for(unsigned i = 0; i < this->panelSet.getWidth(); ++i)
+			{
+				solveColumn(i);
+			}
+			isPuzzleCompleted = this->panelSet.isCompleted();
 		}
-		for(unsigned i = 0; i < panelSet.getWidth(); ++i)
-		{
-			solveColumn(i);
-		}
+		while(!isCompleted());
 	}
 
 	PanelSet2D Solver2D::getResult()const

@@ -6,7 +6,7 @@ namespace nonogram_solver
 {
 	bool Solver1D::isCorrect(const std::vector<unsigned> &spaceSet)const
 	{
-		unsigned minLength = std::reduce(numberSet.getNumbers().begin(), numberSet.getNumbers().end()) + std::reduce(spaceSet.begin(), spaceSet.end());
+		const unsigned minLength = std::accumulate(numberSet.getNumbers().begin(), numberSet.getNumbers().end(), 0) + std::accumulate(spaceSet.begin(), spaceSet.end(), 0);
 		return minLength <= panelSet.getLength();
 	}
 
@@ -18,30 +18,27 @@ namespace nonogram_solver
 		{
 			for(unsigned j = 0; j < spaceSet[i]; ++j)
 			{
-				Position1D position;
-				position.x = n + j;
+				const Position1D position = {n + j};
 				panelLine[position].setStatus(PanelState::guarded);
 			}
 			n += spaceSet[i];
 			for(unsigned j = 0; j < numberSet.getNumbers()[i]; ++j)
 			{
-				Position1D position;
-				position.x = n + j;
+				const Position1D position = {n + j};
 				panelLine[position].setStatus(PanelState::filled);
 			}
 			n += numberSet.getNumbers()[i];
 		}
 		for(; n < panelLine.getLength(); ++n)
 		{
-			Position1D position;
-			position.x = n;
+			const Position1D position = {n};
 			panelLine[position].setStatus(PanelState::guarded);
 		}
 		return panelLine;
 	}
 
 	Solver1D::Solver1D(unsigned length, const NumberSet1D &numberSet)
-		: numberSet(numberSet), panelSet(length), isPuzzleCompleted(false)
+		: numberSet(numberSet), panelSet(length), isUpdated(length), isPuzzleCompleted(false)
 	{
 
 	}
@@ -52,11 +49,11 @@ namespace nonogram_solver
 		{
 			return;
 		}
-		this->panelSet = panelSet;
-		std::vector<unsigned> spaceSet(numberSet.getNumbers().size() + 1);
+		std::vector<unsigned> spaceSet(numberSet.getNumbers().size());
 		std::fill(spaceSet.begin() + 1, spaceSet.end(), 1);
 		spaceSet[0] = 0;
-		unsigned countingDigit = spaceSet.size() - 1;
+		unsigned countingDigit = static_cast<unsigned>(spaceSet.size() - 1);
+		bool initializes = true;
 		while(true)
 		{
 			if(!isCorrect(spaceSet))
@@ -70,13 +67,26 @@ namespace nonogram_solver
 				std::fill(spaceSet.begin() + countingDigit + 1, spaceSet.end(), 1);
 				continue;
 			}
-			countingDigit = spaceSet.size() - 1;
+			countingDigit = static_cast<unsigned>(spaceSet.size() - 1);
 			PanelSet1D madeLine = makeLine(spaceSet);
 			if(fits(panelSet, madeLine))
 			{
-				this->panelSet = this->panelSet && madeLine;
+				if(initializes)
+				{
+					this->panelSet = madeLine;
+					initializes = false;
+				}
+				else
+				{
+					this->panelSet = this->panelSet && madeLine;
+				}
 			}
-			(*spaceSet.end())++;
+			spaceSet.back()++;
+		}
+		for(unsigned i = 0; i < panelSet.getLength(); ++i)
+		{
+			const Position1D position = {i};
+			isUpdated[i] = this->panelSet[position].getStatus() != panelSet[position].getStatus();
 		}
 		isPuzzleCompleted = this->panelSet.isCompleted();
 	}
@@ -102,9 +112,9 @@ namespace nonogram_solver
 		for(unsigned i = 0; i < panelSet1.getLength(); ++i)
 		{
 			const Position1D position = {i};
-			PanelState panelState1 = panelSet1[position].getStatus();
-			PanelState panelState2 = panelSet2[position].getStatus();
-			PanelState status = panelState1 == panelState2 ? panelState1 : PanelState::none;
+			const PanelState panelState1 = panelSet1[position].getStatus();
+			const PanelState panelState2 = panelSet2[position].getStatus();
+			const PanelState status = panelState1 == panelState2 ? panelState1 : PanelState::none;
 			ret[position].setStatus(status);
 		}
 		return ret;

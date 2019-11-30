@@ -9,6 +9,7 @@
     <ClCompile Include="sources\panel_set_2d.cpp" />
     <ClCompile Include="sources\number_set_2d.cpp" />
     <ClCompile Include="sources\solver_2d.cpp" />
+    <ClCompile Include="sources\puzzle_2d_solver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\number_set_1d.hpp" />
@@ -19,5 +20,6 @@
     <ClInclude Include="sources\panel_set_2d.hpp" />
     <ClInclude Include="sources\number_set_2d.hpp" />
     <ClInclude Include="sources\position.hpp" />
+    <ClInclude Include="sources\puzzle_2d_solver.hpp" />
   </ItemGroup>
 </Project>

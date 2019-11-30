@@ -17,6 +17,8 @@ namespace nonogram_solver
 	public:
 		NumberSet2D(unsigned width, unsigned height);
 		void set(const PanelSet2D &panelSet);
+		void setRow(unsigned rowNo, const NumberSet1D &numberSet);
+		void setColumn(unsigned columnNo, const NumberSet1D &numberSet);
 		NumberSet1D getRow(unsigned rowNo)const;
 		NumberSet1D getColumn(unsigned columnNo)const;
 	};

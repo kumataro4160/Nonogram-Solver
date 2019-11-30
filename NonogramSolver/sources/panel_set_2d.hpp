@@ -20,5 +20,6 @@ namespace nonogram_solver
 		void updateColumn(unsigned columnNo, const PanelSet1D &panelSet);
 		Panel &operator[](Position2D position);
 		const Panel &operator[](Position2D position)const;
+		bool isCompleted()const;
 	};
 }

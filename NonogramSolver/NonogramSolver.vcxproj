@@ -49,12 +49,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <StackReserveSize>67108864</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -65,7 +66,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
@@ -74,6 +75,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <StackReserveSize>67108864</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -83,6 +85,7 @@
     <ClCompile Include="sources\panel.cpp" />
     <ClCompile Include="sources\panel_set_1d.cpp" />
     <ClCompile Include="sources\panel_set_2d.cpp" />
+    <ClCompile Include="sources\puzzle_2d_solver.cpp" />
     <ClCompile Include="sources\solver_1d.cpp" />
     <ClCompile Include="sources\solver_2d.cpp" />
   </ItemGroup>
@@ -93,6 +96,7 @@
     <ClInclude Include="sources\panel_set_1d.hpp" />
     <ClInclude Include="sources\panel_set_2d.hpp" />
     <ClInclude Include="sources\position.hpp" />
+    <ClInclude Include="sources\puzzle_2d_solver.hpp" />
     <ClInclude Include="sources\solver_1d.hpp" />
     <ClInclude Include="sources\solver_2d.hpp" />
   </ItemGroup>

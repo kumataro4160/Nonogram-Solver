@@ -13,8 +13,9 @@ namespace nonogram_solver
 
 	public:
 		NumberSet1D(unsigned length);
+		NumberSet1D(unsigned length, const std::vector<unsigned> &numbers);
 		void set(const std::vector<unsigned> &numbers);
 		void set(const PanelSet1D &panelSet);
-		std::vector<unsigned> getNumbers()const;
+		const std::vector<unsigned> &getNumbers()const;
 	};
 }

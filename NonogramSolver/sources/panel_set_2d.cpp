@@ -71,4 +71,19 @@ namespace nonogram_solver
 	{
 		return panels[position.y][position.x];
 	}
+
+	bool PanelSet2D::isCompleted()const
+	{
+		for(const auto &row : panels)
+		{
+			for(const Panel &panel : row)
+			{
+				if(panel.getStatus() == PanelState::none)
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }
