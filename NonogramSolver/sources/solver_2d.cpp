@@ -7,12 +7,28 @@ namespace nonogram_solver
 	{
 		row[rowNo].solve(panelSet.getRow(rowNo));
 		panelSet.updateRow(rowNo, row[rowNo].getResult());
+		const std::vector<bool> isUpdated = row[rowNo].getUpdated();
+		for(unsigned i = 0; i < isUpdated.size(); ++i)
+		{
+			if(isUpdated[i])
+			{
+				solveColumn(i);
+			}
+		}
 	}
 	
 	void Solver2D::solveColumn(unsigned columnNo)
 	{
 		column[columnNo].solve(panelSet.getColumn(columnNo));
 		panelSet.updateColumn(columnNo, column[columnNo].getResult());
+		const std::vector<bool> isUpdated = column[columnNo].getUpdated();
+		for(unsigned i = 0; i < isUpdated.size(); ++i)
+		{
+			if(isUpdated[i])
+			{
+				solveRow(i);
+			}
+		}
 	}
 
 	Solver2D::Solver2D(unsigned width, unsigned height, const NumberSet2D &numberSet)

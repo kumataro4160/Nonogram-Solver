@@ -18,5 +18,6 @@ namespace nonogram_solver
 		Panel &operator[](Position1D position);
 		const Panel &operator[](Position1D position)const;
 		const std::vector<Panel> &getLine()const;
+		bool isCompleted()const;
 	};
 }

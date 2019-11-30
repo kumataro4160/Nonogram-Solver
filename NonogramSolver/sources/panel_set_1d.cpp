@@ -34,4 +34,16 @@ namespace nonogram_solver
 	{
 		return panels;
 	}
+
+	bool PanelSet1D::isCompleted()const
+	{
+		for(const Panel &panel : panels)
+		{
+			if(panel.getStatus() == PanelState::none)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }

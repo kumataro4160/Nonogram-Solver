@@ -12,7 +12,7 @@ namespace nonogram_solver
 
 	void NumberSet1D::set(const std::vector<unsigned> &numbers)
 	{
-		unsigned minLength = std::reduce(numbers.begin(), numbers.end()) + numbers.size() - 1;
+		unsigned minLength = std::reduce(numbers.begin(), numbers.end()) + static_cast<unsigned>(numbers.size() - 1);
 		if(minLength > length)
 		{
 			return;
@@ -25,7 +25,7 @@ namespace nonogram_solver
 
 	}
 
-	std::vector<unsigned> NumberSet1D::getNumberSet()const
+	std::vector<unsigned> NumberSet1D::getNumbers()const
 	{
 		return numbers;
 	}
