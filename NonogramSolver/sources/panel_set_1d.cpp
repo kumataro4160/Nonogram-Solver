@@ -14,4 +14,24 @@ namespace nonogram_solver
 	{
 
 	}
+
+	unsigned PanelSet1D::getLength()const
+	{
+		return static_cast<unsigned>(panels.size());
+	}
+
+	Panel &PanelSet1D::operator[](Position1D position)
+	{
+		return panels[position.x];
+	}
+
+	const Panel &PanelSet1D::operator[](Position1D position)const
+	{
+		return panels[position.x];
+	}
+
+	const std::vector<Panel> &PanelSet1D::getLine()const
+	{
+		return panels;
+	}
 }
