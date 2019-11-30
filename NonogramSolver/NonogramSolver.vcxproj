@@ -78,6 +78,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp" />
+    <ClCompile Include="sources\number_set_1d.cpp" />
+    <ClCompile Include="sources\panel.cpp" />
+    <ClCompile Include="sources\panel_set_1d.cpp" />
+    <ClCompile Include="sources\solver_1d.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sources\number_set_1d.hpp" />
+    <ClInclude Include="sources\panel.hpp" />
+    <ClInclude Include="sources\panel_set_1d.hpp" />
+    <ClInclude Include="sources\solver_1d.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
